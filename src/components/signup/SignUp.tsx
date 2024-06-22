@@ -19,71 +19,75 @@ const SignUpPage = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>네이버</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="아이디"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="비밀번호"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="[선택] 이메일주소"
-        value={email}
-        onChangeText={setEmail}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="이름"
-        value={name}
-        onChangeText={setName}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="생년월일 8자리"
-        value={birthday}
-        onChangeText={setBirthday}
-        keyboardType="numeric"
-      />
-      <View style={styles.genderContainer}>
-        <TouchableOpacity
-          style={[
-            styles.genderButton,
-            gender === 'Male' && styles.genderSelected,
-          ]}
-          onPress={() => setGender('Male')}>
-          <Text style={styles.genderText}>Male</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.genderButton,
-            gender === 'Female' && styles.genderSelected,
-          ]}
-          onPress={() => setGender('Female')}>
-          <Text style={styles.genderText}>Female</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.genderButton,
-            gender === 'Other' && styles.genderSelected,
-          ]}
-          onPress={() => setGender('Other')}>
-          <Text style={styles.genderText}>Other</Text>
-        </TouchableOpacity>
+      <View style={styles.inputGroup}>
+        <TextInput
+          style={styles.input}
+          placeholder="아이디"
+          value={username}
+          onChangeText={setUsername}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="비밀번호"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
+        <TextInput
+          style={[styles.input, styles.lastInput]}
+          placeholder="[선택] 이메일주소"
+          value={email}
+          onChangeText={setEmail}
+        />
       </View>
-      <TextInput
-        style={styles.input}
-        placeholder="휴대전화번호"
-        value={phone}
-        onChangeText={setPhone}
-        keyboardType="numeric"
-      />
+      <View style={styles.inputGroup}>
+        <TextInput
+          style={styles.input}
+          placeholder="이름"
+          value={name}
+          onChangeText={setName}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="생년월일 8자리"
+          value={birthday}
+          onChangeText={setBirthday}
+          keyboardType="numeric"
+        />
+        <View style={[styles.genderContainer, styles.input]}>
+          <TouchableOpacity
+            style={[
+              styles.genderButton,
+              gender === '남자' && styles.genderSelected,
+            ]}
+            onPress={() => setGender('남자')}>
+            <Text style={styles.genderText}>남자</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.genderButton,
+              gender === '여자' && styles.genderSelected,
+            ]}
+            onPress={() => setGender('여자')}>
+            <Text style={styles.genderText}>여자</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.genderButton,
+              gender === '기타' && styles.genderSelected,
+            ]}
+            onPress={() => setGender('기타')}>
+            <Text style={styles.genderText}>기타</Text>
+          </TouchableOpacity>
+        </View>
+        <TextInput
+          style={[styles.input, styles.lastInput]}
+          placeholder="휴대전화번호"
+          value={phone}
+          onChangeText={setPhone}
+          keyboardType="numeric"
+        />
+      </View>
 
       <TouchableOpacity style={styles.signUpButton}>
         <Text style={styles.signUpButtonText}>가입하기</Text>
@@ -113,23 +117,34 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 5,
   },
-  input: {
-    height: 50,
+  inputGroup: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    overflow: 'hidden',
+    marginBottom: 20,
     borderColor: '#dadada',
     borderWidth: 1,
-    borderRadius: 5,
+  },
+  input: {
+    height: 50,
     paddingHorizontal: 10,
     backgroundColor: '#fff',
     fontSize: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#dadada',
+  },
+  lastInput: {
+    borderBottomWidth: 0,
   },
   genderContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 20,
+    paddingHorizontal: 5,
+    paddingVertical: 10,
   },
   genderButton: {
     flex: 1,
-    height: 50,
+    height: 30,
     borderColor: '#dadada',
     borderWidth: 1,
     borderRadius: 5,
@@ -164,7 +179,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 5,
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 10,
   },
   signUpButtonText: {
     color: '#fff',
