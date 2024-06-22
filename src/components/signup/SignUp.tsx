@@ -52,25 +52,29 @@ const SignUpPage = () => {
         keyboardType="numeric"
       />
       <View style={styles.genderContainer}>
-        <TouchableOpacity onPress={() => setGender('남자')}>
-          <Text
-            style={gender === '남자' ? styles.genderSelected : styles.gender}>
-            남자
-          </Text>
+        <TouchableOpacity
+          style={[
+            styles.genderButton,
+            gender === 'Male' && styles.genderSelected,
+          ]}
+          onPress={() => setGender('Male')}>
+          <Text style={styles.genderText}>Male</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setGender('여자')}>
-          <Text
-            style={gender === '여자' ? styles.genderSelected : styles.gender}>
-            여자
-          </Text>
+        <TouchableOpacity
+          style={[
+            styles.genderButton,
+            gender === 'Female' && styles.genderSelected,
+          ]}
+          onPress={() => setGender('Female')}>
+          <Text style={styles.genderText}>Female</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setGender('선택안함')}>
-          <Text
-            style={
-              gender === '선택안함' ? styles.genderSelected : styles.gender
-            }>
-            선택안함
-          </Text>
+        <TouchableOpacity
+          style={[
+            styles.genderButton,
+            gender === 'Other' && styles.genderSelected,
+          ]}
+          onPress={() => setGender('Other')}>
+          <Text style={styles.genderText}>Other</Text>
         </TouchableOpacity>
       </View>
       <TextInput
@@ -91,41 +95,81 @@ const SignUpPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#f5f6f7',
     padding: 20,
-    backgroundColor: '#fff',
   },
   header: {
-    fontSize: 20,
-    marginBottom: 20,
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: '#03c75a',
+    marginBottom: 30,
     textAlign: 'center',
   },
+  inputContainer: {
+    marginBottom: 20,
+  },
+  label: {
+    fontSize: 14,
+    color: '#333',
+    marginBottom: 5,
+  },
   input: {
-    height: 40,
-    borderColor: '#ccc',
+    height: 50,
+    borderColor: '#dadada',
     borderWidth: 1,
-    marginBottom: 10,
+    borderRadius: 5,
     paddingHorizontal: 10,
+    backgroundColor: '#fff',
+    fontSize: 16,
   },
   genderContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginBottom: 10,
+    justifyContent: 'space-between',
+    marginBottom: 20,
   },
-  gender: {
-    fontSize: 16,
+  genderButton: {
+    flex: 1,
+    height: 50,
+    borderColor: '#dadada',
+    borderWidth: 1,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    marginHorizontal: 2,
   },
   genderSelected: {
+    borderColor: '#03c75a',
+    backgroundColor: '#e8f0fe',
+  },
+  genderText: {
     fontSize: 16,
-    color: 'blue',
+    color: '#333',
+  },
+  phoneInput: {
+    height: 50,
+    borderColor: '#dadada',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+  },
+  countryCode: {
+    fontSize: 16,
+    color: '#333',
   },
   signUpButton: {
-    backgroundColor: 'aliceblue',
-    padding: 10,
+    backgroundColor: '#03c75a',
+    padding: 15,
+    borderRadius: 5,
     alignItems: 'center',
+    marginTop: 20,
   },
   signUpButtonText: {
-    color: '#333',
-    fontSize: 16,
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
