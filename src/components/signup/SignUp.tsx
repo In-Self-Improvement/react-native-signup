@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
 
 const SignUpPage = () => {
   const [username, setUsername] = useState('');
@@ -15,6 +16,14 @@ const SignUpPage = () => {
   const [birthday, setBirthday] = useState('');
   const [gender, setGender] = useState('');
   const [phone, setPhone] = useState('');
+  const [countryCode, setCountryCode] = useState('+82');
+
+  const countryCodes = [
+    {label: 'Korea (Rep. of) +82', value: '+82'},
+    {label: 'Japan +81', value: '+81'},
+    {label: 'United States +1', value: '+1'},
+    // Add more countries as needed
+  ];
 
   return (
     <View style={styles.container}>
@@ -80,13 +89,21 @@ const SignUpPage = () => {
             <Text style={styles.genderText}>기타</Text>
           </TouchableOpacity>
         </View>
-        <TextInput
-          style={[styles.input, styles.lastInput]}
-          placeholder="휴대전화번호"
-          value={phone}
-          onChangeText={setPhone}
-          keyboardType="numeric"
-        />
+        <View style={styles.phoneInputGroup}>
+          <RNPickerSelect
+            onValueChange={value => setCountryCode(value)}
+            items={countryCodes}
+            style={pickerSelectStyles}
+            value={countryCode}
+          />
+          <TextInput
+            style={[styles.input, styles.phoneNumberInput]}
+            placeholder="휴대전화번호"
+            value={phone}
+            onChangeText={setPhone}
+            keyboardType="numeric"
+          />
+        </View>
       </View>
 
       <TouchableOpacity style={styles.signUpButton}>
@@ -161,18 +178,22 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
   },
-  phoneInput: {
-    height: 50,
+  phoneInputGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
     borderColor: '#dadada',
     borderWidth: 1,
     borderRadius: 5,
-    paddingHorizontal: 10,
     backgroundColor: '#fff',
-    justifyContent: 'center',
   },
-  countryCode: {
+  phoneNumberInput: {
+    flex: 3,
+    height: 50,
+    paddingHorizontal: 10,
     fontSize: 16,
-    color: '#333',
+    borderLeftWidth: 1,
+    borderLeftColor: '#dadada',
+    backgroundColor: '#fff',
   },
   signUpButton: {
     backgroundColor: '#03c75a',
@@ -185,6 +206,31 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+});
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    flex: 1,
+    height: 50,
+    paddingHorizontal: 10,
+    backgroundColor: '#fff',
+    fontSize: 16,
+    borderColor: '#dadada',
+    borderWidth: 1,
+    borderRadius: 5,
+    color: '#333',
+  },
+  inputAndroid: {
+    flex: 1,
+    height: 50,
+    paddingHorizontal: 10,
+    backgroundColor: '#fff',
+    fontSize: 16,
+    borderColor: '#dadada',
+    borderWidth: 1,
+    borderRadius: 5,
+    color: '#333',
   },
 });
 
